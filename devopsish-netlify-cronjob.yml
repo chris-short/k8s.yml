@@ -1,0 +1,22 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: devopsish-netlify-cronjob
+spec:
+  schedule: "1 2-14 * * 0-1,5-6"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          imagePullSecrets:
+            - name: gcr-secret
+          containers:
+          - name: devopsish-netlify-cronjob
+            image: gcr.io/chrisshort-net/devopsish-netlify-cron:latest
+            env:
+              - name: URL
+                valueFrom:
+                  secretKeyRef:
+                    name: devopish-build-hook
+                    key: url
+          restartPolicy: OnFailure

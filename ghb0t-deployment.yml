@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: deployment-ghb0t
+  labels:
+    app: ghb0t
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ghb0t
+  template:
+    metadata:
+      labels:
+        app: ghb0t
+    spec:
+      containers:
+      - name: ghb0t-container
+        image: gcr.io/chrisshort-net/ghb0t
+        args:
+          - -token
+          - $(TOKEN)
+        env:
+          - name: TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: ghb0t
+                key: token

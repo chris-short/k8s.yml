@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: tiller-deploy-rpi
+  labels:
+    app: helm
+  namespace: kube-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tiller
+  template:
+    metadata:
+      labels:
+        app: tiller
+    spec:
+      containers:
+      - name: tiller-container
+        image: timotto/rpi-tiller
