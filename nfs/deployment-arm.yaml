@@ -24,9 +24,9 @@ spec:
             - name: NFS_SERVER
               value: 192.168.86.200
             - name: NFS_PATH
-              value: /mnt/k8s-pv
+              value: /mnt/pv
       volumes:
         - name: nfs-client-root
           nfs:
             server: 192.168.86.200
-            path: /mnt/kube_nfs
+            path: /mnt/pv
