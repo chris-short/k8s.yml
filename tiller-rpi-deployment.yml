@@ -24,7 +24,6 @@
     },
     "template": {
       "metadata": {
-        "creationTimestamp": null,
         "labels": {
           "app": "helm",
           "name": "tiller"
@@ -90,6 +89,8 @@
         "restartPolicy": "Always",
         "terminationGracePeriodSeconds": 30,
         "dnsPolicy": "ClusterFirst",
+        "serviceAccountName": "tiller",
+        "serviceAccount": "tiller",
         "securityContext": {},
         "schedulerName": "default-scheduler"
       }
