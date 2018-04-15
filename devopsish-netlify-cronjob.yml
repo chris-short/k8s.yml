@@ -17,6 +17,6 @@ spec:
               - name: URL
                 valueFrom:
                   secretKeyRef:
-                    name: devopish-build-hook
+                    name: devopsish-build-hook
                     key: url
           restartPolicy: OnFailure
