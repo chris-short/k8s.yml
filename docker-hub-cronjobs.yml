@@ -1,0 +1,39 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: docker-hub-cronjobs
+spec:
+#  schedule: "15 */12 * * *"
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          imagePullSecrets:
+            - name: gcr-secret
+          containers:
+          - name: docker-ubuntu1604-ansible-hook
+            image: gcr.io/chrisshort-net/curltainer:latest
+            env:
+              - name: URL
+                valueFrom:
+                  secretKeyRef:
+                    name: docker-ubuntu1604-ansible-hook
+                    key: url
+              - name: CONTTYPE
+                value: "Content-Type: application/json"
+              - name: DATA
+                value: '{"build": true}'
+          - name: docker-centos7-ansible-hook
+            image: gcr.io/chrisshort-net/curltainer:latest
+            env:
+              - name: URL
+                valueFrom:
+                  secretKeyRef:
+                    name: docker-centos7-ansible-hook
+                    key: url
+              - name: CONTTYPE
+                value: "Content-Type: application/json"
+              - name: DATA
+                value: '{"build": true}'
