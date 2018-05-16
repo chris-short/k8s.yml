@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: sj
+  name: kafka-topics-ui
+  labels:
+    app: kafka-topics-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka-topics-ui
+  template:
+    metadata:
+      labels:
+        app: kafka-topics-ui
+    spec:
+      containers:
+      - name: 
+        image: gcr.io/chrisshort-net/kafka-topics-ui
+      volumes:
+      - name: config-volume
+        configMap:
+          name: configmap-kafka-topics-ui

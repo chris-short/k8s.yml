@@ -1,0 +1,1 @@
+# kubectl create configmap --namespace sj --from-file env.js configmap-kafka-topics-ui
