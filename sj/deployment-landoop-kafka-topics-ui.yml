@@ -15,9 +15,14 @@ spec:
       labels:
         app: kafka-topics-ui
     spec:
+      imagePullSecrets:
+      - name: gcr-secret
       containers:
-      - name: 
+      - name: kafka-topics-ui
         image: gcr.io/chrisshort-net/kafka-topics-ui
+        volumeMounts:
+        - name: config-volume
+          mountPath: /env.js
       volumes:
       - name: config-volume
         configMap:
