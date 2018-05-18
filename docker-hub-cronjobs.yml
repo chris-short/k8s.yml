@@ -3,8 +3,8 @@ kind: CronJob
 metadata:
   name: docker-hub-cronjobs
 spec:
-#  schedule: "15 */12 * * *"
-  schedule: "*/5 * * * *"
+  schedule: "15 */12 * * *"
+#  schedule: "*/5 * * * *"
   jobTemplate:
     spec:
       template:
@@ -13,6 +13,30 @@ spec:
           imagePullSecrets:
             - name: gcr-secret
           containers:
+          - name: curltainer
+            image: gcr.io/chrisshort-net/curltainer:latest
+            env:
+              - name: URL
+                valueFrom:
+                  secretKeyRef:
+                    name: curltainer-hook
+                    key: url
+              - name: CONTTYPE
+                value: "Content-Type: application/json"
+              - name: DATA
+                value: '{"build": true}'
+          - name: ssl-tester
+            image: gcr.io/chrisshort-net/curltainer:latest
+            env:
+              - name: URL
+                valueFrom:
+                  secretKeyRef:
+                    name: ssl-tester-hook
+                    key: url
+              - name: CONTTYPE
+                value: "Content-Type: application/json"
+              - name: DATA
+                value: '{"build": true}'
           - name: docker-ubuntu1604-ansible-hook
             image: gcr.io/chrisshort-net/curltainer:latest
             env:
@@ -32,6 +56,54 @@ spec:
                 valueFrom:
                   secretKeyRef:
                     name: docker-centos7-ansible-hook
+                    key: url
+              - name: CONTTYPE
+                value: "Content-Type: application/json"
+              - name: DATA
+                value: '{"build": true}'
+          - name: docker-debian8-ansible-hook
+            image: gcr.io/chrisshort-net/curltainer:latest
+            env:
+              - name: URL
+                valueFrom:
+                  secretKeyRef:
+                    name: docker-debian8-ansible-hook
+                    key: url
+              - name: CONTTYPE
+                value: "Content-Type: application/json"
+              - name: DATA
+                value: '{"build": true}'
+          - name: docker-centos7-percona-toolkit
+            image: gcr.io/chrisshort-net/curltainer:latest
+            env:
+              - name: URL
+                valueFrom:
+                  secretKeyRef:
+                    name: docker-centos7-percona-toolkit
+                    key: url
+              - name: CONTTYPE
+                value: "Content-Type: application/json"
+              - name: DATA
+                value: '{"build": true}'
+          - name: docker-centos6-percona-toolkit
+            image: gcr.io/chrisshort-net/curltainer:latest
+            env:
+              - name: URL
+                valueFrom:
+                  secretKeyRef:
+                    name: docker-centos6-percona-toolkit-hook
+                    key: url
+              - name: CONTTYPE
+                value: "Content-Type: application/json"
+              - name: DATA
+                value: '{"build": true}'
+          - name: docker-fedora25-ansible
+            image: gcr.io/chrisshort-net/curltainer:latest
+            env:
+              - name: URL
+                valueFrom:
+                  secretKeyRef:
+                    name: docker-fedora25-ansible-hook
                     key: url
               - name: CONTTYPE
                 value: "Content-Type: application/json"
