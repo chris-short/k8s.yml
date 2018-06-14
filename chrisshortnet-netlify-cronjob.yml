@@ -12,7 +12,7 @@ spec:
             - name: gcr-secret
           containers:
           - name: devopsish-netlify-cronjob
-            image: chrisshort/netlify-cron
+            image: chrisshort/netlify-hook:latest
             #            image: gcr.io/chrisshort-net/devopsish-netlify-cron:latest
             env:
               - name: URL

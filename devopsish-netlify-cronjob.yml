@@ -13,7 +13,7 @@ spec:
           containers:
           - name: devopsish-netlify-cronjob
             #            image: gcr.io/chrisshort-net/devopsish-netlify-cron:latest
-            image: chrisshort/netlify-cron:latest
+            image: chrisshort/netlify-hook:latest
             env:
               - name: URL
                 valueFrom:
