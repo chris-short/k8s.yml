@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: ghb0t-container
-        image: gcr.io/chrisshort-net/ghb0t
+        image: jess/ghb0t
         args:
           - -token
           - $(TOKEN)
@@ -24,5 +24,5 @@ spec:
           - name: TOKEN
             valueFrom:
               secretKeyRef:
-                name: ghb0t
+                name: ghb0t-secret
                 key: token
