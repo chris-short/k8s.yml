@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: docker-hub-cronjobs
 spec:
-  schedule: "15 12 * * *"
+  schedule: "40 18 * * *"
 #  schedule: "*/5 * * * *"
   jobTemplate:
     spec:
