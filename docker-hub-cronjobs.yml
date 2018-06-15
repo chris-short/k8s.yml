@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: docker-hub-cronjobs
 spec:
-  schedule: "27 20 * * *"
+  schedule: "31 20 * * *"
 #  schedule: "*/5 * * * *"
   jobTemplate:
     spec:
@@ -14,7 +14,7 @@ spec:
             - name: gcr-secret
           containers:
           - name: curltainer
-            image: chrisshort/curltainer:latest
+            image: gcr.io/chrisshort-net/curltainer:latest
             resources:
               requests:
                 cpu: "500m"
@@ -31,7 +31,7 @@ spec:
               - name: DATA
                 value: '{"build": true}'
           - name: ssl-tester
-            image: chrisshort/curltainer:latest
+            image: gcr.io/chrisshort-net/curltainer:latest
             resources:
               requests:
                 cpu: "500m"
@@ -48,7 +48,7 @@ spec:
               - name: DATA
                 value: '{"build": true}'
           - name: docker-ubuntu1604-ansible-hook
-            image: chrisshort/curltainer:latest
+            image: gcr.io/chrisshort-net/curltainer:latest
             resources:
               requests:
                 cpu: "500m"
@@ -65,7 +65,7 @@ spec:
               - name: DATA
                 value: '{"build": true}'
           - name: docker-centos7-ansible-hook
-            image: chrisshort/curltainer:latest
+            image: gcr.io/chrisshort-net/curltainer:latest
             resources:
               requests:
                 cpu: "500m"
@@ -82,7 +82,7 @@ spec:
               - name: DATA
                 value: '{"build": true}'
           - name: docker-debian8-ansible-hook
-            image: chrisshort/curltainer:latest
+            image: gcr.io/chrisshort-net/curltainer:latest
             resources:
               requests:
                 cpu: "500m"
@@ -99,7 +99,7 @@ spec:
               - name: DATA
                 value: '{"build": true}'
           - name: docker-centos7-percona-toolkit
-            image: chrisshort/curltainer:latest
+            image: gcr.io/chrisshort-net/curltainer:latest
             resources:
               requests:
                 cpu: "500m"
@@ -116,7 +116,7 @@ spec:
               - name: DATA
                 value: '{"build": true}'
           - name: docker-centos6-percona-toolkit
-            image: chrisshort/curltainer:latest
+            image: gcr.io/chrisshort-net/curltainer:latest
             resources:
               requests:
                 cpu: "500m"
@@ -133,7 +133,7 @@ spec:
               - name: DATA
                 value: '{"build": true}'
           - name: docker-fedora25-ansible
-            image: chrisshort/curltainer:latest
+            image: gcr.io/chrisshort-net/curltainer:latest
             resources:
               requests:
                 cpu: "500m"
