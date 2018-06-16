@@ -1,0 +1,31 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: curltainer-docker-hub-cronjob
+spec:
+  schedule: "15 20 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          imagePullSecrets:
+            - name: gcr-secret
+          containers:
+          - name: curltainer
+            image: gcr.io/chrisshort-net/curltainer:latest
+            #            resources:
+            #  requests:
+            #    cpu: "500m"
+            #  limits:
+            #    cpu: "3000m"
+            env:
+              - name: URL
+                valueFrom:
+                  secretKeyRef:
+                    name: curltainer-hook
+                    key: url
+              - name: CONTTYPE
+                value: "Content-Type: application/json"
+              - name: DATA
+                value: '{"build": true}'
