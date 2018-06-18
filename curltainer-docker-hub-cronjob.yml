@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: curltainer-docker-hub-cronjob
 spec:
-  schedule: "15 20 * * *"
+  schedule: "40 20 * * *"
   jobTemplate:
     spec:
       template:
@@ -14,11 +14,11 @@ spec:
           containers:
           - name: curltainer
             image: gcr.io/chrisshort-net/curltainer:latest
-            #            resources:
-            #  requests:
-            #    cpu: "500m"
-            #  limits:
-            #    cpu: "3000m"
+            resources:
+              requests:
+                cpu: "100m"
+              limits:
+                cpu: "150m"
             env:
               - name: URL
                 valueFrom:
